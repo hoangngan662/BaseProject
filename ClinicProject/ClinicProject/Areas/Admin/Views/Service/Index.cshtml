@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ClinicProject.DichVu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/specialists.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Dịch vụ</h3>
+    <hr />
+</div>
+
+<div class="section filters-section">
+    <div class="buttons-wrapper">
+        <a class="btn btn-dark-red-f-gr" href="@Url.Action("AddService","Service")">
+            <i class="las la-plus-circle"></i>
+            Thêm dịch vụ
+        </a>
+    </div>
+</div>
+
+<div class="section specialists-table-view">
+    <table class="table table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>Tên dịch vụ</th>
+                <th>Đơn giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ID_DichVu
+                    </td>
+                    <td>@item.TenDichVu</td>
+                    <td>@item.DonGia</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

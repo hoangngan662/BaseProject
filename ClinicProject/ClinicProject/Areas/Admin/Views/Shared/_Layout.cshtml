@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <meta name="viewport" control="width=device-width, initial-scale=1" />
+    <link href="~/Assets/Admin/css/vendors/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/Admin/css/vendors/line-awesome.min.css" />
+    <link rel="stylesheet" href="~/Assets/Admin/css/pages/layout.css" />
+    <link rel="icon" href="~/Assets/Admin/images/qafya-icon.ico" />
+    <script src="~/Assets/Admin/js/vendors/jquery.min.js"></script>
+    <script src="~/Assets/Admin/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/Admin/js/global.js"></script>
+    <link href="~/Assets/Admin/css/pages/mylayout.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    <header>
+        @RenderPage("Components/_TopBar.cshtml")
+    </header>
+    <main>
+        @RenderPage("Components/_SideNav.cshtml")
+
+        <div class="main-content">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+</body>
+
+@RenderPage("Components/_Footer.cshtml")
+
+@RenderPage("Components/_Logout.cshtml")
+
+@RenderSection("Scripts", false)
+
+</html>

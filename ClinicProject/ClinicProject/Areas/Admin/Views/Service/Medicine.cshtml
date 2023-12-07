@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ClinicProject.Thuoc>
+
+@{
+    ViewBag.Title = "Medicine";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/specialists.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Thuốc</h3>
+    <hr />
+</div>
+
+<div class="section filters-section">
+    <div class="buttons-wrapper">
+        <a class="btn btn-dark-red-f-gr" href="@Url.Action("AddMedicine","Service")">
+            <i class="las la-plus-circle"></i>
+            Thêm thuốc mới
+        </a>
+    </div>
+</div>
+
+<div class="section specialists-table-view">
+    <table class="table table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Mã số thuốc</th>
+                <th>Tên thuốc</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ID_Thuoc
+                    </td>
+                    <td>@item.TenThuoc</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

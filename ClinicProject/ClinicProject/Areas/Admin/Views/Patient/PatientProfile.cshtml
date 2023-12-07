@@ -1,0 +1,207 @@
+﻿@model ClinicProject.BenhNhan
+
+@{
+    ViewBag.Title = "PatientProfile";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/details.css" rel="stylesheet" />
+}
+
+<div class="section row title-section">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Patient")">bệnh nhân</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.HoTen</li>
+            </ol>
+        </nav>
+    </div>
+
+</div>
+
+<div class="section patient-details-section">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="mini-card text-center">
+                                    <div class="card-header">
+                                        <img class="rounded-circle"
+                                             src="https://placebeard.it/640x360" loading="lazy" />
+                                    </div>
+                                    <div class="card-body">
+                                        <h4>@Model.HoTen</h4><small class="text-muted">@Model.Email</small>
+                                        <h5>tuổi</h5>
+                                        @{
+
+                                            var age = DateTime.Today.Year - Model.NgaySinh.Value.Year;
+                                        }
+                                        <p>@age</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="@Url.Action("AddAppointment","Appointment")">
+                                            <button class="btn btn-dark-red-f btn-sm">
+                                                <i class="las la-calendar-plus"></i>Thêm lịch hẹn mới
+                                            </button>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 patients-details-card-wrapper">
+                                <div class="mini-card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @{
+                                                        string gender = "Nữ";
+                                                        if (Model.GioiTinh == true)
+                                                        {
+                                                            gender = "Nam";
+                                                        }
+                                                    }
+                                                    <label>giới tính</label><input class="form-control" readonly="readonly"
+                                                                                   value="@gender" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Ngày sinh</label><input class="form-control" readonly="readonly" value="@Model.NgaySinh.Value.ToString("dd/MM/yyyy")" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>số điện thoại</label><input class="form-control" readonly="readonly" value="@Model.SoDienThoai" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>địa chỉ</label><input class="form-control" readonly="readonly" value="@Model.DiaChi" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>
+                                                        Email
+                                                    </label><input class="form-control"
+                                                                   readonly="readonly" value="@Model.Email" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active"
+                                       id="upcoming-appointments-tab" data-toggle="tab"
+                                       href="#upcoming-appointments" role="tab"
+                                       aria-controls="upcoming-appointments"
+                                       aria-selected="true">Lịch hẹn sắp tới</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link"
+                                       id="medical-records-tab" data-toggle="tab"
+                                       href="#medical-records" role="tab"
+                                       aria-controls="medical-records" aria-selected="false">
+                                        Hồ sơ khám bệnh
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="upcoming-appointments"
+                                     role="tabpanel" aria-labelledby="upcoming-appointments-tab">
+                                    @if (ViewBag.lichKham.Count == 0)
+                                    {
+                                        <div class="tab-pane" id="past-appointments" role="tabpanel"
+                                             aria-labelledby="medical-records-tab">Chưa có lịch hẹn!</div>
+                                    }
+                                    else
+                                    {
+
+                                        foreach (var item in ViewBag.lichKham)
+                                        {
+                                            <div class="media">
+                                                <div class="align-self-center">
+                                                    <h3>Ngày @item.ThoiGian.Day</h3>
+                                                    <p>@item.ThoiGian.Month/@item.ThoiGian.Year</p>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <label class="label-orange-bl">Đang xử lý</label>
+                                                        <p>Bác sĩ @item.NhanVien.HoTen</p>
+                                                        <p><i class="las la-tv"></i>@item.ChuDe</p>
+                                                        <p><i class="las la-clock"></i>@item.MoTa</p>
+                                                        <label class="label-cream label-sm">
+                                                            <i class="las la-hourglass-half"></i>
+                                                            @item.ThoiGian.Hour h
+                                                        </label>
+                                                        <a href="@Url.Action("Appointment","Patient", new { id = item.ID_LichKham })">
+                                                            <i class="las la-ellipsis-v"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                                @if (ViewBag.hoSo.Count == 0)
+                                {
+                                    <div class="tab-pane fade" id="medical-records" role="tabpanel"
+                                         aria-labelledby="medical-records-tab">Chưa có hồ sơ khám bệnh!</div>
+                                }
+                                else
+                                {
+                                    <div class="tab-pane fade" id="medical-records" role="tabpanel"
+                                         aria-labelledby="medical-records-tab">
+                                        @foreach (var item in ViewBag.hoSo)
+                                        {
+                                            <div class="media">
+                                                <div class="align-self-center">
+                                                    <h3>Ngày @item.ThoiGian.Day</h3>
+                                                    <p>@item.ThoiGian.Month/@item.ThoiGian.Year</p>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <label class="label-blue-bl">Hoàn thành</label>
+                                                        <p>Bác sĩ @item.LichKham.NhanVien.HoTen</p>
+                                                        <p><i class="las la-tv"></i>@item.TrieuChung</p>
+                                                        <p><i class="las la-clock"></i>@item.ChanDoan</p>
+                                                        <label class="label-cream label-sm">
+                                                            <i class="las la-hourglass-half"></i>
+                                                            @item.ThoiGian.Hour h
+                                                        </label>
+                                                        <a href="@Url.Action("RecordDetail","Patient", new { id = item.ID_PhieuKham })">
+                                                            <i class="las la-ellipsis-v"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

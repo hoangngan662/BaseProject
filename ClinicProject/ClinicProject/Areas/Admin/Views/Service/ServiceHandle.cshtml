@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ClinicProject.ChiTietDV>
+
+@{
+    ViewBag.Title = "ServiceHandle";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/patients.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Xử lý dịch vụ</h3>
+    <hr />
+
+</div>
+<div class="section patients-table-view" id="filteredData">
+    <br />
+
+    <table class="table table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Mã phiếu khám</th>
+                <th>Bác sĩ</th>
+                <th>Bệnh nhân</th>
+                <th>Dịch vụ</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ID_PhieuKham
+                    </td>
+
+                    <td>
+                        @item.PhieuKham.LichKham.NhanVien.HoTen
+                    </td>
+
+                    <td>@item.PhieuKham.LichKham.BenhNhan.HoTen</td>
+                    <td>@item.DichVu.TenDichVu</td>
+                    <td>
+                        @item.PhieuKham.ThoiGian
+                    </td>
+                    <td>
+                        @if (item.KetQua == null)
+                        {
+                            <a class="view-more btn btn-sm btn-dark-red-f" href="@Url.Action("AddResult","Service", new {id = item.ID_DichVu, id_pk = item.ID_PhieuKham})">Xử lý</a>
+                        }
+                        else
+                        {
+                            <label class="label-blue">hoàn thành</label>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

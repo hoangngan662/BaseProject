@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/dashboard.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Thống kê</h3>
+    <hr />
+</div>
+
+<div class="section card-summaries">
+    <div class="section-content">
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Ca khám bệnh</h5>
+                </div>
+                <div class="card-body">
+                    <div class="">
+                        <div>
+                            <label>Ngày bắt đầu</label>
+                            <input type="date" class="start-date form-control" />
+                        </div>
+                        <div>
+                            <label>Ngày kết thúc</label>
+                            <input type="date" class="end-date form-control" />
+                        </div>
+                        <button class="mt-1 btn btn-primary btn-get-data">Thống kê</button>
+                        <br />
+                    </div>
+
+                    <canvas id="recent-activity-chart"></canvas>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Lịch hẹn khám bệnh</h5>
+                </div>
+                <div class="card-body"><canvas id="bookings-chart"></canvas></div>
+                <div class="card total-counts-summary">
+                    <div class="card-header">
+                        <h5>Thống kê số lượng</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center text-capitalize">
+                            <div class="col-md-6">
+                                <i class="las la-users la-2x mb-1"></i>
+                                <h4 class="mb-1">@ViewBag.cntNV</h4>
+                                <p>Nhân viên</p>
+                            </div>
+                            <div class="col-md-6">
+                                <i class="las la-user-md la-2x mb-1"></i>
+                                <h4 class="mb-1">@ViewBag.cntBS</h4>
+                                <p>Bác sĩ</p>
+                            </div>
+                            <div class="col-md-6">
+                                <i class="las la-user-injured la-2x mb-1"></i>
+                                <h4 class="mb-1">@ViewBag.cntBN</h4>
+                                <p>Bệnh nhân</p>
+                            </div>
+                            <div class="col-md-6">
+                                <i class="las la-hospital la-2x mb-1"></i>
+                                <h4 class="mb-1">@ViewBag.cntDV</h4>
+                                <p>Dịch vụ</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Assets/Admin/js/dashboard.js"></script>
+    <script src="~/Assets/Admin/js/vendors/Chart.bundle.min.js"></script>
+    <script>
+
+        var ctx = document.getElementById('recent-activity-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+                datasets: [{
+                    label: 'Thống kê số ca khám',
+                    data: @Html.Raw(Json.Encode(ViewBag.cnts)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function updateChart(labels, data) {
+            myChart.data.labels = labels;
+            myChart.data.datasets[0].data = data;
+            myChart.update();
+        }
+
+        $(".btn-get-data").click(() => {
+            var start = $(".start-date")[0].value;
+            var end = $(".end-date")[0].value;
+            $.ajax({
+                url: 'Statistic/GetData',
+                type: 'get',
+                data: { start: start, end: end },
+                success: function (res) {
+                    console.log(res);
+                    labels = res.label;
+                    data = res.cnts;
+                    //myChart.destroy();
+                    updateChart(labels, data)
+                }
+            }, 1000)
+        })
+
+
+        console.log(@ViewBag.cntpie)
+        var bkc = document.getElementById('bookings-chart').getContext('2d');
+        var pieChart = new Chart(bkc, {
+            type: 'pie',
+            data: {
+                labels: ["Đã hoàn thành","Đã huỷ","Đang xử lý"],
+                datasets: [{
+                    label: 'Thống kê lịch hẹn khám',
+                    data: @Html.Raw(Json.Encode(ViewBag.pie)),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)', // Màu cho phần 1
+                        'rgba(54, 162, 235, 0.7)', // Màu cho phần 2
+                        'rgba(255, 206, 86, 0.7)'  // Màu cho phần 3
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

@@ -1,0 +1,268 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Start  bootstrap-touch-slider Slider -->
+<div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel"
+     data-pause="hover" data-interval="5000">
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#bootstrap-touch-slider" data-slide-to="0" class="active"></li>
+        <li data-target="#bootstrap-touch-slider" data-slide-to="1"></li>
+        <li data-target="#bootstrap-touch-slider" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper For Slides -->
+    <div class="carousel-inner" role="listbox">
+        <!-- Third Slide -->
+        <div class="item active">
+            <!-- Slide Background -->
+            <img src="~/Assets/Main/img/bg/3.jpg" alt="Slider Images" class="slide-image" />
+            <div class="bs-slider-overlay"></div>
+
+            <div class="slide-text slide_style_left">
+                <h1 data-animation="animated fadeInRight"><span class="color-defult"> Phòng khám </span>Tư nhân</h1>
+                <p data-animation="animated fadeInLeft">
+                    Được thành lập từ năm 2010, Phòng khám Tim mạch Cần Thơ là đơn vị với hơn 5 năm kinh nghiệm với 15 chuyên khoa cùng đội ngũ Bác sĩ chuyên khoa sâu.
+                </p>
+                <a href="#" class="btn btn-default" data-animation="animated fadeInLeft">
+                    Xem
+                    thêm
+                </a>
+                <a href="@Url.Action("AddAppointment","Home")" class="btn btn-primary" data-animation="animated fadeInRight">
+                    Đặt
+                    lịch
+                </a>
+            </div>
+        </div>
+        <!-- End of Slide -->
+        <!-- Second Slide -->
+        <div class="item">
+            <!-- Slide Background -->
+            <img src="~/Assets/Main/img/bg/2.jpg" alt="Slider Images" class="slide-image" />
+            <div class="bs-slider-overlay"></div>
+            <!-- Slide Text Layer -->
+            <div class="slide-text slide_style_center">
+                <h1 data-animation="animated fadeInLeft">
+                    Theo dõi <span class="color-defult"> tình trạng</span> sức
+                    khoẻ
+                </h1>
+
+                <p data-animation="animated lightSpeedIn">
+                    Phòng khám mang đến cho quý khách hàng dịch vụ chăm sóc sức khỏe và khám chữa bệnh toàn diện.
+                </p>
+                <a href="#" class="btn btn-default" data-animation="animated fadeInUp">Xem thêm</a>
+                <a href="@Url.Action("AddAppointment","Home")" class="btn btn-primary" data-animation="animated fadeInDown">
+                    Đặt
+                    lịch
+                </a>
+            </div>
+        </div>
+        <!-- End of Slide -->
+        <!-- Third Slide -->
+        <div class="item">
+            <!-- Slide Background -->
+            <img src="~/Assets/Main/img/bg/1.jpg" alt="Slider Images" class="slide-image" />
+            <div class="bs-slider-overlay"></div>
+            <!-- Slide Text Layer -->
+            <div class="slide-text slide_style_right">
+                <h1 data-animation="animated bounceInDown">
+                    Điều trị vấn đề <span class="color-defult">
+                        tim
+                        mạch.
+                    </span>
+                </h1>
+                <p data-animation="animated fadeInRight">
+                    Phòng khám cung cấp các dịch vụ khám và chữa bệnh tim mạch.
+                </p>
+                <a href="#" class="btn btn-default" data-animation="animated fadeInLeft">
+                    Xem
+                    thêm
+                </a>
+                <a href="@Url.Action("AddAppointment","Home")" class="btn btn-primary" data-animation="animated fadeInRight">
+                    Đặt
+                    lịch
+                </a>
+            </div>
+        </div>
+        <!-- End of Slide -->
+    </div><!-- End of Wrapper For Slides -->
+    <!-- Left Control -->
+    <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+        <span class="fa fa-angle-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <!-- Right Control -->
+    <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+        <span class="fa fa-angle-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div> <!-- End  bootstrap-touch-slider Slider -->
+<!-- Counter start -->
+<section class="funfact-field over-layer-default" style="background-image: url('/Assets/Main/img/bg/6.jpg')">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter-col text-center">
+                    <i class="flaticon-heart"></i>
+                    <div class="count">
+                        <div class="start-count">@ViewBag.c_ser</div>
+                        <h4>Loại dịch vụ</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter-col text-center">
+                    <i class="flaticon-human-lungs"></i>
+                    <div class="count">
+                        <div class="start-count">@ViewBag.c_case</div>
+                        <h4>Ca khám</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter-col text-center">
+                    <i class="flaticon-kidney"></i>
+                    <div class="count">
+                        <div class="start-count">@ViewBag.c_pat</div>
+                        <h4>Bệnh nhân</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="counter-col text-center">
+                    <i class="flaticon-first-aid-kit"></i>
+                    <div class="count">
+                        <div class="start-count border-none">@ViewBag.c_emp</div>
+                        <h4>Nhân viên</h4>
+                    </div>
+                </div>
+            </div>
+            <span id="services"></span>
+        </div>
+
+    </div>
+
+</section>
+<!-- Counter end -->
+<!-- service start -->
+<section class="service-area bg-f8 animatedParent animateOnce">
+    <div class="container">
+        <div class="section-title">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2>Các <span class="color-defult">Dịch vụ</span></h2>
+                    <div class="line-border-center bg-defult"></div>
+                    <p>
+                        Phòng khám cung cấp các dịch vụ tim mạch.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section-content">
+            <div class="row">
+                
+                @foreach (var item in ViewBag.service) { 
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="service-item text-center style-3">
+                        <span class="flaticon-heart-1"></span>
+                        <h4><a href="#">@item.TenDichVu</a></h4>
+                        <div class="border-center"></div>
+                        <p>
+                            <b>@string.Format("{0:N0} VNĐ", item.DonGia)</b>
+                        </p>
+                        <button type="submit" class="btn btn-theme margin-top-20" data-text="Send Message">
+                            Đặt ngay
+                        </button>
+                    </div>
+                </div>
+                }
+                 
+            </div>
+        </div>
+    </div>
+</section>
+<!-- service end -->
+<!-- divider start -->
+<section class="divider divider-video over-layer-white" style="background-image: url(/Assets/Main/img/bg/6.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a href="https://youtu.be/vX-lG9nb1fU" data-fancybox-group="gallery" class="lightbox-image"
+                   title="lightbox view"><i class="icon icon-Play"></i></a>
+            </div>
+        </div>
+        <span id="doctors"></span>
+    </div>
+</section>
+<!-- divider end -->
+<!-- Team start -->
+<section class="team-area">
+    <div class="container">
+        <div class="section-title">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2><span class="color-defult">Đội ngũ</span> Bác sĩ</h2>
+                    <div class="line-border-center bg-defult"></div>
+                    <p>
+                        Với đội ngũ bác sĩ chuyên khoa, kỹ thuật viên, chuyên viên y tế nhiều kinh nghiệm đã chẩn đoán chính xác và điều trị hiệu quả cho nhiều bệnh nhân.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section-content">
+            <div class="row">
+                <div class="team-carousel">
+                    @{
+                        var i = 1;
+                    }
+                    @foreach (var item in ViewBag.doctor)
+                    {
+                        var img = i.ToString() + ".png";
+                        <div class="item">
+                            <div class="team-item-2">
+                                <img src="~/Assets/Main/img/team/@img" alt="">
+                                <div class="team-contact">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="team-content">
+                                    <h4><a href="#">Dr. @item.HoTen</a></h4>
+                                    @{
+                                        var ck = "Chưa có";
+                                        if (item.ChuyenMon.ChuyenKhoa != null)
+                                        {
+                                            ck = item.ChuyenMon.ChuyenKhoa;
+                                        }
+
+                                    }
+                                    <h6>@ck</h6>
+                                    <div class="team-content-icon">
+                                        <i class="flaticon-heart"></i>
+                                    </div>
+                                </div>
+                                <div class="timetable">
+                                    <a href="@Url.Action("DoctorDetail", "Home",  new { id = item.ID_NhanVien })" class="btn-theme text-center btn-block"> Chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                        i = i % 5;
+                        i++;
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team end -->

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ClinicProject.PhieuKham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/specialists.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/css/pages/style.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Ca khám</h3>
+    <hr />
+</div>
+
+<div class="section specialists-table-view">
+    <table class="table table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Mã phiếu khám</th>
+                <th>Bệnh nhân</th>
+                <th>Chủ đề</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @item.ID_PhieuKham
+                    </td>
+
+
+                    <td>
+                        <img class="rounded-circle mr-1" src="~/Assets/Admin/images/people.svg" loading="lazy" />
+                        <span class="ml-2">@item.LichKham.BenhNhan.HoTen</span>
+                    </td>
+                    <td>@item.LichKham.ChuDe</td>
+                    <td class="text-muted">@item.ThoiGian</td>
+                    <td>
+
+                        <a href="@Url.Action("Edit","Record", new { id = item.ID_PhieuKham })" class="btn btn-sm btn-dark-blue-f">
+                            <i class="las la-edit"></i>
+                            sửa
+                        </a>
+
+                        <a href="" class="btn btn-sm btn-dark-red-f" data-toggle="modal" data-target="#delete-modal"
+                           onclick="DeleteShowConfirm('@item.ID_PhieuKham')">
+                            <i class="las la-check"></i>
+                            xong
+                        </a>
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="modal" id="delete-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body delete-name">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("FinishRecord", "Record"))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="id" class="delete-id" type="hidden" />
+                    <input type="submit" value="Đồng ý" class="btn btn-danger delete-now" />
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var DeleteShowConfirm = function (id) {
+            $("#delete-modal").modal('show')
+            $(".delete-name > p").text("Xác nhận hoàn thành phiếu khám " + id + "?")
+            $(".delete-id").val(id)
+            $('#delete-modal').modal('hide');
+        }
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ClinicProject.LichKham>
+
+<br />
+
+<table class="table table-hover table-responsive-lg">
+    <thead>
+        <tr>
+            <th>Bệnh nhân</th>
+            <th>Bác sĩ</th>
+            <th>Chủ đề</th>
+            <th>Mô tả</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="rounded-circle mr-1" src="~/Assets/Admin/images/people.svg" loading="lazy" />
+                    <span class="ml-2">@item.BenhNhan.HoTen</span>
+                </td>
+
+                <td>
+                    <img class="rounded-circle mr-1" src="~/Assets/Admin/images/doctor (1).svg" loading="lazy" />
+                    <span class="ml-2">@item.NhanVien.HoTen</span>
+                </td>
+
+                <td>@item.ChuDe</td>
+                <td>@item.MoTa</td>
+                <td>@Convert.ToDateTime(item.ThoiGian).Date.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @if (item.TrangThai == "P")
+                    {
+                        <a class="view-more btn btn-sm btn-dark-red-f" href="@Url.Action("Detail","Appointment", new { id = item.ID_LichKham })">Xử lý</a>
+                    }
+                    else if (item.TrangThai == "D")
+                    {
+                        <label class="label-blue">hoàn thành</label>
+                    }
+                    else if (item.TrangThai == "PD")
+                    {
+                        <label class="label-green">đã xử lý</label>
+                    }
+                    else
+                    {
+                        <label class="label-grey">đã huỷ</label>
+                    }
+
+                </td>
+                @*<td>
+            <a class="view-more btn btn-sm btn-dark-red-f" href="@Url.Action("PatientProfile","Patient", new { id = item.ID_BenhNhan })">Chi tiết</a>
+        </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

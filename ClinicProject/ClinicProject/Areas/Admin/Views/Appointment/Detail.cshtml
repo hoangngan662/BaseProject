@@ -1,0 +1,83 @@
+﻿@model ClinicProject.PhieuKham
+
+@{
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Phiếu khám bệnh</title>
+    <style type="text/css">
+        h2 {
+            page-break-after: always
+        }
+
+    </style>
+</head>
+
+<body>
+    <table width="650" border="0">
+        <tbody>
+            <tr>
+                <td>
+                    Phòng khám tim mạch Cần Thơ</td>
+                <td align="right">Mã Phiếu khám @Model.ID_PhieuKham </td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="650" border="0">
+        <tbody>
+            <tr>
+                <td colspan="2">PHIẾU KHÁM BỆNH</td>
+            </tr>
+            <tr>
+                <td width="17%">Họ Và Tên </td>
+                <td width="83%">
+                    <strong>@Model.LichKham.BenhNhan.HoTen</strong>&nbsp;
+                    <font face="Times new roman" size="3">&nbsp; - Mã Số:&nbsp;&nbsp;&nbsp;<strong>@Model.LichKham.ID_BenhNhan</strong></font>
+
+                </td>
+            </tr>
+            <tr>
+                <td>Ngày Sinh </td>
+                <td>
+                    @Model.LichKham.BenhNhan.NgaySinh
+                </td>
+            </tr>
+            <tr>
+                <td>Địa chỉ</td>
+                <td><font face="Times new roman" size="3">@Model.LichKham.BenhNhan.DiaChi</font></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><font face="Times new roman" size="3">@Model.LichKham.BenhNhan.Email</font></td>
+            </tr>
+            <tr>
+                <td width="17%">Bác sĩ </td>
+                <td width="83%">
+                    <strong>@Model.LichKham.NhanVien.HoTen</strong>&nbsp;
+                    <font face="Times new roman" size="3">&nbsp; - Mã Số:&nbsp;&nbsp;&nbsp;<strong>@Model.LichKham.ID_BacSi</strong></font>
+
+                </td>
+            </tr>
+            <tr>
+                <td>Chủ đề</td>
+                <td><font face="Times new roman" size="3">@Model.LichKham.ChuDe</font></td>
+            </tr>
+            <tr>
+                <td>Ngày khám</td>
+                <td><font face="Times new roman" size="3">@Model.ThoiGian</font></td>
+            </tr>
+            <tr>
+                <td>Ngày in phiếu</td>
+                <td><font face="Times new roman" size="3">@DateTime.Now</font></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-dark-red-f" href="@Url.Action("Index","Appointment")">Quay về</a>
+    
+</body>
+</html>

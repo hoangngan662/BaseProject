@@ -1,0 +1,178 @@
+﻿@model ClinicProject.BenhNhan
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="team-area">
+
+    <div class="container">
+        <div class="section-title ">
+            <h2>PROFILE</h2>
+            <div class="small-line-border-2"></div>
+        </div>
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team-item-2">
+                        <img src="~/Assets/Admin/images/people.svg" alt="">
+                    </div>
+
+                </div>
+                <div class="col-md-8 team-area">
+                    <div class="team-details-content">
+                        <h2><a href="#"> @Model.HoTen.ToUpper() </a></h2>
+                        <h4>Tài khoản: @Model.TaiKhoan</h4>
+                        <dl class="">
+                            <dt>
+                                Ngày sinh:
+                            </dt>
+                            <dd>
+                                @Model.NgaySinh
+                            </dd>
+                            <dt>
+                                Giới tính:
+                            </dt>
+                            @{
+                                var gender = "";
+                                if (Model.GioiTinh == true)
+                                {
+                                    gender = "Nam";
+                                }
+                                else
+                                {
+                                    gender = "Nữ";
+                                }
+                            } 
+                            <dd>
+                                @gender
+                            </dd>
+                            <dt>
+                                Địa chỉ:
+                            </dt>
+                            <dd>
+                                @Model.DiaChi
+                            </dd>
+                            <dt>
+                                Số điện thoại:
+                            </dt>
+                            <dd>
+                                @Model.SoDienThoai
+                            </dd>
+                            <dt>
+                                Email:
+                            </dt>
+                            <dd>
+                                @Model.Email
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="title ">
+                <h3>Lịch hẹn khám</h3>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Thời gian
+                        </th>
+                        <th>
+                            Bác sĩ
+                        </th>
+                        <th>
+                            Chủ đề
+                        </th>
+                        <th>
+                            Trạng thái
+                        </th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.lk)
+                    {
+                        <tr>
+                            <td>
+                                @item.ThoiGian
+                            </td>
+                            <td>
+                                @item.NhanVien.HoTen
+                            </td>
+                            <td>
+                                @item.ChuDe
+                            </td>
+
+                            @if (item.TrangThai == "P")
+                            {
+                                <td>Đang xử lý</td>
+                            }
+                            else if (item.TrangThai == "PD")
+                            {
+                                <td>Đã xử lý</td>
+                            }
+                            else if (item.TrangThai == "D")
+                            {
+                                <td>Đã hoàn thành</td>
+                            }
+                            else
+                            {
+                                <td>Đã huỷ</td>
+                            }
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div class="title ">
+                <h3>Lịch sử khám bệnh</h3>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Thời gian
+                        </th>
+                        <th>
+                            Bác sĩ
+                        </th>
+                        <th>
+                            Chẩn đoán
+                        </th>
+                        <th>
+                            Chi tiết
+                        </th>
+                    </tr>
+
+                    @foreach (var item in ViewBag.pk)
+                    {
+                        <tr>
+                            <td>
+                                @item.ThoiGian
+                            </td>
+                            <td>
+                                @item.LichKham.NhanVien.HoTen
+                            </td>
+                            <td>
+                                @item.ChanDoan
+                            </td>
+
+                            <td><a href="#">Chi tiết</a></td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+

@@ -1,0 +1,214 @@
+﻿@model ClinicProject.PhieuKham
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/specialists.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Cập nhật phiếu khám</h3>
+    <hr />
+</div>
+<div class="section justify-content-between">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ID_PhieuKham">Mã phiếu khám</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ID_PhieuKham, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                </div>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2" for="BenhNhan">Bệnh nhân</label>
+                <div class="col-md-10">
+
+                    <input class="form-control text-box single-line" type="text" value="@Model.LichKham.BenhNhan.HoTen" disabled>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="TrieuChung">Triệu chứng</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TrieuChung, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TrieuChung, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+            <hr />
+            <h3 class="title">Dịch vụ</h3>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownList("ID_DichVu", (SelectList)ViewBag.DVs, "Chọn dịch vụ", new { @class = "form-control col-md-5" })
+
+                    <button class="btn btn-dark-blue-f" type="button" onclick="addService()">Thêm dịch vụ</button>
+                    <table class="table" id="serviceTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    STT
+                                </th>
+                                <th>
+                                    Tên dịch vụ
+                                </th>
+                                <th>
+                                    Đơn giá
+                                </th>
+                                <th>
+                                    Kết quả
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int cnt = 0;
+                                foreach (var item in ViewBag.CTDV)
+                                {
+                                    cnt++;
+
+                                    <tr>
+                                        <td>
+                                            @cnt
+                                        </td>
+                                        <td>
+                                            @item.DichVu.TenDichVu
+                                        </td>
+                                        <td>
+                                            @item.DichVu.DonGia
+                                        </td>
+                                        <td>
+                                            @item.KetQua
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <h3 class="title">Toa thuốc</h3>
+            <hr />
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownList("ID_Thuoc", (SelectList)ViewBag.Thuoc, "Chọn loại thuốc", new { @class = "form-control col-md-5" })
+                    <input class="text-box form-control col-md-5" type="number" name="SoLuong" id="SoLuong" placeholder="Số lượng" />
+                    <input class="text-box form-control col-md-5" type="text" name="LieuDung" id="LieuDung" placeholder="Liều dùng" />
+                    <button class="btn btn-dark-blue-f" type="button" onclick="addPrescriptionItem()">Thêm Thuốc</button>
+                    <table class="table">
+
+                        <tr>
+                            <th>
+                                STT
+                            </th>
+                            <th>
+                                Tên thuốc
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Liều dùng
+                            </th>
+                        </tr>
+                        @{
+                            cnt = 0;
+                            foreach (var item in ViewBag.Toa)
+                            {
+                                cnt++;
+
+                                <tr>
+                                    <td>
+                                        @cnt
+                                    </td>
+                                    <td>
+                                        @item.Thuoc.TenThuoc
+                                    </td>
+                                    <td>
+                                        @item.SoLuong
+                                    </td>
+                                    <td>
+                                        @item.LieuDung
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+
+
+            <hr />
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ChanDoan">Chẩn đoán</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ChanDoan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ChanDoan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="GhiChu">Ghi chú</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                </div>
+            </div>
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<script>
+    function addPrescriptionItem() {
+        var id = $("#ID_Thuoc").val();
+        var lieudung = $("#LieuDung").val();
+        var soluong = $("#SoLuong").val();
+        var id_pk = @Model.ID_PhieuKham;
+
+        var url = "/Admin/Record/ChiTietToa/" + id + "?id_pk=" + id_pk + "&soluong=" + soluong + "&lieudung=" + lieudung;        
+        window.location.href = url;
+    };
+    function addService() {
+        var id = $("#ID_DichVu").val();
+        var id_pk = @Model.ID_PhieuKham;
+
+        var url = "@Url.Action("ChiTietDV", "Record", new { id = "__param1__", id_pk = "__param2__" })";
+        url = url.replace("__param1__", encodeURIComponent(id));
+        url = url.replace("__param2__", encodeURIComponent(id_pk));
+        
+        window.location.href = url;
+    };
+</script>
+
+

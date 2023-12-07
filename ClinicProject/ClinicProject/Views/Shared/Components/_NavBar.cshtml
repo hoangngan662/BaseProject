@@ -1,0 +1,77 @@
+﻿<div class="main-navbar conner-style style-2 position-fixed">
+    <div class="container padding-none">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand dis-none" href="@Url.Action("Index", "Home")">
+                            <img src="~/Assets/Main/img/logo.png" alt="">
+                        </a>
+                        <a class="navbar-brand dis-block" href="@Url.Action("Index", "Home")">
+                            <img src="~/Assets/Main/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown"
+                         data-animations-delay="1.8s" data-animations="fadeInUp">
+                        <ul class="nav navbar-nav bg-none navbar-right style-3">
+                            <li class="active">
+                                <a href="@Url.Action("Index", "Home")" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span data-hover="Home">
+                                        Trang chủ
+                                    </span>
+                                </a>
+
+                            </li>
+
+                            <li class="">
+                                <a href="/#services" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span data-hover="Services">Dịch vụ</span>
+                                </a>
+
+                            </li>
+
+                            <li class="">
+                                <a href="/#doctors" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span data-hover="Doctors">Bác sĩ</span>
+                                </a>
+
+                            </li>
+
+                            <li class="">
+                                <a href="@Url.Action("AddAppointment", "Home")" role="button" aria-haspopup="true"
+                                   aria-expanded="false"><span data-hover="Contact">Đặt lịch </span></a>
+
+                            </li>
+                            @{
+                                if (Session["PatientSession"] != null)
+                                {
+                                    <li class="nav-item">
+                                        <a>|</a>
+                                    </li>
+
+                                    <li class="nav-item"><a href="@Url.Action("UserProfile","Home")">Hi, @Session["Name"]</a></li>
+                                    <li class="nav-item"><a href="@Url.Action("Logout", "Home")"><i class="fa fa-power-off fa-lg"></i></a></li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a>|</a>
+                                    </li>
+                                    <li class="nav-item"><a href="@Url.Action("Login", "Home")"><i class="fa fa-user-circle-o fa-lg"></i></a></li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

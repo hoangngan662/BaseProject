@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ClinicProject.BenhNhan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/patients.css" rel="stylesheet" />
+}
+
+<div class="section title-section">
+    <h3 class="title">Bệnh nhân</h3>
+    <hr />
+</div>
+
+<div class="section filters-section justify-content-between">
+
+    
+    <div class="buttons-wrapper ml-auto">
+        <a class="btn btn-dark-red-f-gr" href="@Url.Action("AddPatient","Patient")">
+            <i class="las la-plus-circle"></i>
+            Thêm bệnh nhân
+        </a>
+    </div>
+</div>
+
+<div class="section patients-table-view">
+    <table class="table table-hover table-responsive-lg">
+        <thead>
+            <tr>
+                <th>Mã bệnh nhân</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
+                <th>Tuổi</th>
+                <th>Ngày sinh</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ID_BenhNhan</td>
+                    <td>
+                        <img class="rounded-circle" src="~/Assets/Admin/images/people.svg"
+                             loading="lazy" />
+                        <span class="ml-2">@item.HoTen</span>
+                    </td>
+                    @{string gender = "Nữ";
+                        if (item.GioiTinh == true)
+                        {
+                            gender = "Nam";
+                        }
+                    }
+                    <td class="text-muted">@gender</td>
+                    @{
+
+                        var age = DateTime.Today.Year - item.NgaySinh.Value.Year;
+                    }
+                    <td>@age</td>
+                    <td>@item.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <a class="view-more btn btn-sm btn-dark-red-f" href="@Url.Action("PatientProfile","Patient", new { id = item.ID_BenhNhan })">Chi tiết</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/Assets/Admin/js/patients.js"></script>
+    <script>
+        document.getElementById("btnTimKiem").addEventListener("click", function () {
+            var tuKhoa = document.getElementById("tuKhoa").value;
+
+            
+            $.ajax({
+                type: "GET",
+                url: "/Patient/FindByName",
+                data: { tuKhoa: tuKhoa },
+                success: function (result) {                    
+                    document.getElementById("result").innerHTML = result;
+                }
+            });
+        });
+    </script>
+
+}

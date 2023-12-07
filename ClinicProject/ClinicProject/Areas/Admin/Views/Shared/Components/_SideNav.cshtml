@@ -1,0 +1,70 @@
+﻿
+<div class="side-nav">
+    <ul class="list-group list-group-flush">
+        <a class="list-group-item" href="@Url.Action("Index","Dashboard")"
+           data-toggle="tooltip" data-placement="bottom" title="Dashboard">
+            <i class="las la-shapes la-lw"></i>
+            <span>tổng quan </span>
+        </a>
+        @{
+            if (Session["Right"].ToString() == "1")
+            {
+                <a class="list-group-item" href="@Url.Action("Index","Record")"
+                   data-toggle="tooltip" data-placement="bottom" title="Appointment">
+                    <i class="las la-file-alt la-lw"></i>
+                    <span>ca khám</span>
+                </a>
+            }
+            else if (Session["Right"].ToString() == "2")
+            {
+                <a class="list-group-item" href="@Url.Action("Index","Patient")"
+                   data-toggle="tooltip" data-placement="bottom" title="Patient">
+                    <i class="las la-user-injured la-lw"></i>
+                    <span>bệnh nhân</span>
+                </a>
+                <a class="list-group-item" href="@Url.Action("Index","Appointment")"
+                   data-toggle="tooltip" data-placement="bottom" title="Appointment">
+                    <i class="las la-shopping-cart la-lw"></i>
+                    <span>lịch khám</span>
+                </a>
+                <a class="list-group-item" href="@Url.Action("ServiceHandle","Service")"
+                   data-toggle="tooltip" data-placement="bottom" title="Service">
+                    <i class="las la-procedures la-lw"></i>
+                    <span>dịch vụ</span>
+                </a>
+            }
+            else
+            {
+                <a class="list-group-item" href="@Url.Action("Index","Employee")"
+                   data-toggle="tooltip" data-placement="bottom" title="Employee">
+                    <i class="las la-user-nurse la-lw"></i>
+                    <span>nhân viên</span>
+                </a>
+
+                <a class="list-group-item" href="@Url.Action("Doctor","Employee")"
+                   data-toggle="tooltip" data-placement="bottom" title="Doctor">
+                    <i class="las la-user-md la-lw"></i>
+                    <span>bác sĩ</span>
+                </a>
+                <a class="list-group-item" href="@Url.Action("Index","Service")"
+                   data-toggle="tooltip" data-placement="bottom" title="Service">
+                    <i class="las la-procedures la-lw"></i>
+                    <span>dịch vụ</span>
+                </a>
+                <a class="list-group-item" href="@Url.Action("Medicine","Service")"
+                   data-toggle="tooltip" data-placement="bottom" title="Medicine">
+                    <i class="las la-capsules la-lw"></i>
+                    <span>thuốc</span>
+                </a>
+                <a class="list-group-item" href="@Url.Action("Index","Statistic")"
+                   data-toggle="tooltip" data-placement="bottom" title="Statistic">
+                    <i class="las la-chart-bar la-lw"></i>
+                    <span>thống kê</span>
+                </a>
+            }
+        }
+
+
+
+    </ul>
+</div>

@@ -1,0 +1,88 @@
+﻿@model ClinicProject.BenhNhan
+
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/LoginLayout/_LoginLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6 col-xl-5">
+            <div class="login-wrap p-4 p-md-5">
+                <div class="icon d-flex align-items-center justify-content-center">
+                    <span class="fa fa-edit"></span>
+                </div>
+                <h3 class="text-center mb-4">Tạo tài khoản</h3>
+                <form action="/Home/Signup" method="post" class="signup-form">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group mb-3">
+                        <label class="label" for="TaiKhoan">Tài khoản</label>
+                        <input value="@ViewBag.Username" type="text" id="TaiKhoan" name="TaiKhoan" class="form-control" placeholder="Username">
+                        @Html.ValidationMessage("TaiKhoan", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="HoTen">Họ tên</label>
+                        <input value="@ViewBag.Name" type="text" id="HoTen" name="HoTen" class="form-control" placeholder="Họ và tên">
+                        @Html.ValidationMessage("HoTen", new { @class = "text-danger" })
+                    </div>
+                    @{
+                        if (ViewBag.NgaySinh == null)
+                        {
+                            ViewBag.NgaySinh = "2000-01-01";
+                        }
+                        else
+                        {
+                            ViewBag.NgaySinh = Convert.ToDateTime(ViewBag.NgaySinh).ToString("yyyy-MM-dd");
+                        }
+                    }
+                    <div class="form-group mb-3">
+                        <label class="label" for="NgaySinh">Ngày sinh</label>
+                        <input class="form-control" id="NgaySinh" name="NgaySinh" data-val="true" data-val-date="The field NgaySinh must be a date." type="date" value="@ViewBag.NgaySinh">
+                        @Html.ValidationMessage("NgaySinh", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="label" for="GioiTinh">Giới tính</label>
+                        <select class="form-control list-box tri-state" id="GioiTinh" name="GioiTinh">
+                            <option selected="selected" value="true">Nam</option>
+                            <option value="false">Nữ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="label" for="SoDienThoai">Số điện thoại</label>
+                        <input value="@ViewBag.SoDienThoai" type="text" id="SoDienThoai" name="SoDienThoai" class="form-control" placeholder="Số điện thoại">
+                        @Html.ValidationMessage("SoDienThoai", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="DiaChi">Địa chỉ</label>
+                        <input value="@ViewBag.DiaChi" type="text" id="DiaChi" name="DiaChi" class="form-control" placeholder="Địa chỉ">
+                        @Html.ValidationMessage("DiaChi", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="Email">Email</label>
+                        <input value="@ViewBag.Email" type="text" id="Email" name="Email" class="form-control" autocomplete="Email" placeholder="Email">
+                        @Html.ValidationMessage("Email", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="MatKhau">Mật khẩu</label>
+                        <input id="MatKhau" name="MatKhau" type="password" class="form-control" placeholder="Password">
+                        <span toggle="#password-field"
+                              class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        @Html.ValidationMessage("MatKhau", new { @class = "text-danger" })
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-primary rounded submit px-3">
+                            Đăng ký
+                        </button>
+                    </div>
+                </form>
+                <p>Tôi đã có tài khoản! <a href="@Url.Action("Login","Home")">Đăng nhập</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

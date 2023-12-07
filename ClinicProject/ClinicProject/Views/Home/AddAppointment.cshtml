@@ -1,0 +1,106 @@
+﻿@model ClinicProject.LichKham
+
+@{
+    ViewBag.Title = "AddAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="inner-bg over-layer-black" style="background-image: url('/Assets/Main/img/bg/4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mini-title inner-style-2">
+                    <h3>Đặt lịch khám</h3>
+                    <p><a href="@Url.Action("Index","Home")">Trang chủ</a> <span class="fa fa-angle-right"></span> <a href="#">Đặt lịch</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container padding-bottom-80">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="section-title margin-left-20 ">
+                        <h6>Liên hệ</h6>
+                        <h2>Đặt lịch khám</h2>
+                        <div class="small-line-border-2"></div>
+                    </div>
+                    <form action="/Home/AddAppointment" id=""  method="post">
+                        <div class="col-md-6">
+                            <input type="text" name="ID_BenhNhan" id="ID_BenhNhan" class="form-control" value="@Session["Name"]" disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.DropDownList("ID_BacSi", (SelectList)ViewBag.doctor, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-12">
+                            <input type="datetime-local" name="ThoiGian" class="form-control" id="ThoiGian" value="@Convert.ToDateTime(DateTime.Today).ToString("yyyy-MM-dd")T10:00">
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" name="ChuDe" class="form-control" placeholder="Chủ đề" id="ChuDe" required>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="contact-textarea">
+                                <textarea class="form-control" rows="6" placeholder="Nhập mô tả" id="MoTa" name="MoTa" required></textarea>
+                            </div>
+                            <button class="btn btn-theme" type="submit">Đặt lịch</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="service-area over-layer-default" style="background-image:url(/Assets/Main/img/bg/5.jpg);">
+    <div class="container padding-bottom-none padding-top-40">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="service-item style-1 text-white border-right">
+                        <div class="service-icon">
+                            <i class="pe-7s-call"></i>
+                        </div>
+                        <div class="content">
+                            <h5><a href="#">Liên hệ ngay</a></h5>
+                            <p>0123 456 789</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="service-item style-1 text-white border-right">
+                        <div class="">
+                            <i class="pe-7s-mail-open"></i>
+                        </div>
+                        <div class="content">
+                            <h5><a href="#">Địa chỉ email</a></h5>
+                            <p>lthngan662@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="service-item style-1 text-white">
+                        <div class="">
+                            <i class="pe-7s-map-marker"></i>
+                        </div>
+                        <div class="content">
+                            <h5><a href="#">Địa chỉ phòng khám</a></h5>
+                            <p>3/2 Xuân Khánh, Cần Thơ </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="~/Assets/Main/js/map.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsTvi2dmx_Bnel6F0POzTg6-TaQ16JeDs&amp;callback=initMap" type="text/javascript"></script>

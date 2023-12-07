@@ -1,0 +1,74 @@
+﻿@model ClinicProject.ChuyenMon
+
+@{
+    ViewBag.Title = "DoctorDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="inner-bg over-layer-black" style="background-image: url('/Assets/Main/img/bg/4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mini-title inner-style-2">
+                    <h3>Doctor Dtails</h3>
+                    <p><a href="@Url.Action("Index","Home")">Trang chủ</a> <span class="fa fa-angle-right"></span> <a>@Model.NhanVien.HoTen</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Team start -->
+<section class="team-area">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-5">
+
+                    <div class="team-item-2">
+                        <img src="~/Assets/Main/img/team/1.png" alt="">
+                        <div class="team-contact">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="team-content">
+                            <h4><a href="#">Dr. @Model.NhanVien.HoTen</a></h4>
+                            <h6>@Model.ChuyenKhoa</h6>
+                            <div class="team-content-icon">
+                                <i class="flaticon-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-details">
+                        <address>
+                            <ul>
+                                <li><i class="pe-7s-map-marker"></i>@Model.NhanVien.DiaChi</li>
+                                <li><i class="pe-7s-call"></i>Phone: @Model.NhanVien.SoDienThoai</li>
+                                <li><i class="pe-7s-mail"></i><a href="mailto:">Email: @Model.NhanVien.Email</a></li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-7 team-area">
+                    <div class="team-details-content">
+                        <h2><a href="#"> DR. @Model.NhanVien.HoTen.ToUpper() </a></h2>
+                        <h6>@Model.ChuyenKhoa.ToUpper()</h6>
+                        <h4>@Model.ChucDanh</h4>
+                        <p>@Model.ThongTin</p>
+                    </div>
+                </div>
+                <a href="@Url.Action("AddAppointment","Home")" class="btn-theme btn-price" data-animation="animated fadeInRight">
+                    Đặt
+                    lịch khám
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team end -->

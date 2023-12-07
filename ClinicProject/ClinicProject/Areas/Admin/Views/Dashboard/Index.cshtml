@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Styles{
+    <link href="~/Assets/Admin/css/pages/dashboard.css" rel="stylesheet" />
+}
+
+<div class="section">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="title">Tổng quan</h3>
+        </div>
+    </div>
+</div>
+<div class="section welcome-section">
+    <div class="section-content">
+        <div class="card-deck">
+            <div class="card welcome-content-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-7 welcome-text-wrapper align-self-center">
+                            <h5>
+                                Xin chào, @Session["Name"]
+                            </h5>
+                            <p>Welcome to your dashboard</p>
+                        </div>
+                        <div class="col-md-5 welcome-img-wrapper">
+                            <img src="~/Assets/Admin/images/hello.svg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card app-stats-card">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <i class="las la-user-injured la-3x align-self-center"></i>
+                            <p>bệnh nhân</p>
+                            <h4><a href="">@ViewBag.c_Patient</a></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="las la-user-md la-3x align-self-center"></i>
+                            <p>bác sĩ</p>
+                            <h4><a href="">@ViewBag.c_Doctor</a></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="las la-clinic-medical la-3x align-self-center"></i>
+                            <p>ca khám bệnh</p>
+                            <h4><a href="">@ViewBag.c_Treatment</a></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section functionality-section">
+    <div class="section-content">
+        <div class="card-deck">
+
+            @{
+                if (Session["Right"].ToString() == "1")
+                {
+                    <a class="card text-center" href="@Url.Action("Index","Record")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las las la-calendar"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>ca khám</p>
+                        </div>
+                    </a>
+                }
+                else if (Session["Right"].ToString() == "2")
+                {
+                    <a class="card text-center" href="@Url.Action("AddPatient","Patient")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-user-injured"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>thêm bệnh nhân</p>
+                        </div>
+                    </a>
+                    <a class="card text-center" href="@Url.Action("AddAppointment","Appointment")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-calendar"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>thêm lịch khám</p>
+                        </div>
+                    </a>
+                    <a class="card text-center" href="@Url.Action("ServiceHandle","Service")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-procedures"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>xử lý dịch vụ</p>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    <a class="card text-center" href="@Url.Action("AddEmployee","Employee")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-user-nurse"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>thêm nhân viên</p>
+                        </div>
+                    </a>
+                    <a class="card text-center" href="@Url.Action("AddService","Service")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-procedures"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>thêm dịch vụ</p>
+                        </div>
+                    </a>
+                    <a class="card text-center" href="@Url.Action("AddMedicine","Service")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-capsules"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>thêm thuốc</p>
+                        </div>
+                    </a>
+                    <a class="card text-center" href="@Url.Action("Index","Statistic")">
+                        <div class="card-title">
+                            <div class="icon-wrapper"><i class="las la-chart-bar"></i></div>
+                        </div>
+                        <div class="card-body">
+                            <p>Thống kê</p>
+                        </div>
+                    </a>                    
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Assets/Admin/js/dashboard.js"></script>
+    <script src="~/Assets/Admin/js/vendors/Chart.bundle.min.js"></script>
+}
+
+
+
